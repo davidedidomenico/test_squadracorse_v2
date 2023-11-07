@@ -1,0 +1,7 @@
+ho impostato il TIM3, con i primi 3 canali in output compare, con prescaler a 1000 per avere un periodo di circa 780ms (con 84MHz di clock), avendo un periodo di 16 bit (periodo = periodo_timer * periodo_clock * 1000). Per raggiungere le soglie di 200ms, 350ms e 500ms ho impostato le soglie rispettivamente a  18181, 31818 e 45454 tick.
+ho impostato il TIM4 ch4 in input capture, sul falling edge, per monitorare la pressione del tasto presente sulla scheda, l ADC1 per leggere i valori di tensione provenienti dal sensore interno di temperatura e da un potenziometro proveniente da un circuito esterno per simulare la tensione di alimentazione e l usart2.
+Come led ho sfruttato quello verde all interno della scheda nucleof401re a mia disposizione e un led rosso esterno, entrambi pilotati attraverso GPIO.
+ho utilizzato le librerie LL per tutto a parte che per l usart e il TIM4 per cui ho usato la libreria HAL.
+La formula ottenuta nel datasheeet riguardo alla misura di temperatura comprende un offset, fino a 45°C in base alla specifica nucleo, siccome è utilizzato per rilevare variazioni di temperatura, che ho corretto (nel mio caso era di circa 26°C) avvalendomi di un termometro esterno.
+
+Ho scritto tutto ma non sono riuscito a debuggare il motivo per cui l adc effettua solo una misura di tensione temperatura e poi si blocca e l usart non comunica cio che mando.
